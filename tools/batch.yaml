@@ -1,0 +1,63 @@
+identity:
+  author: 0xMassi
+  name: batch
+  label:
+    en_US: Batch
+description:
+  human:
+    en_US: Extract content from multiple URLs in one operation.
+  llm: Scrape up to 50 comma- or newline-separated URLs and return one structured result per URL.
+parameters:
+  - name: urls
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: URLs
+    human_description:
+      en_US: Up to 50 comma- or newline-separated webpage URLs.
+    llm_description: One or more complete HTTP or HTTPS URLs separated by commas or new lines. Maximum 50.
+  - name: formats
+    type: select
+    multiple: true
+    required: false
+    form: form
+    label:
+      en_US: Output formats
+    human_description:
+      en_US: Content formats to return for every URL.
+    options:
+      - label:
+          en_US: Markdown
+        value: markdown
+      - label:
+          en_US: Plain text
+        value: text
+      - label:
+          en_US: LLM-ready text
+        value: llm
+    default:
+      - markdown
+  - name: concurrency
+    type: number
+    required: false
+    form: form
+    label:
+      en_US: Concurrency
+    human_description:
+      en_US: Maximum simultaneous URL extractions.
+    min: 1
+    max: 20
+    default: 5
+  - name: no_cache
+    type: boolean
+    required: false
+    form: form
+    label:
+      en_US: Fetch fresh content
+    human_description:
+      en_US: Skip Webclaw's response cache.
+    default: false
+extra:
+  python:
+    source: tools/batch.py

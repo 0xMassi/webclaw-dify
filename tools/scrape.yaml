@@ -1,0 +1,81 @@
+identity:
+  author: 0xMassi
+  name: scrape
+  label:
+    en_US: Scrape
+description:
+  human:
+    en_US: Extract clean content and metadata from one webpage.
+  llm: Fetch a URL and return clean Markdown, plain text, or LLM-ready content with page metadata.
+parameters:
+  - name: url
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: URL
+    human_description:
+      en_US: The webpage URL to scrape.
+    llm_description: A complete HTTP or HTTPS URL to scrape.
+  - name: formats
+    type: select
+    multiple: true
+    required: false
+    form: form
+    label:
+      en_US: Output formats
+    human_description:
+      en_US: Content formats to return.
+    options:
+      - label:
+          en_US: Markdown
+        value: markdown
+      - label:
+          en_US: Plain text
+        value: text
+      - label:
+          en_US: LLM-ready text
+        value: llm
+    default:
+      - markdown
+  - name: only_main_content
+    type: boolean
+    required: false
+    form: form
+    label:
+      en_US: Main content only
+    human_description:
+      en_US: Remove navigation, footers, and other surrounding content.
+    default: true
+  - name: include_selectors
+    type: string
+    required: false
+    form: form
+    label:
+      en_US: Include selectors
+    human_description:
+      en_US: Optional comma-separated CSS selectors to keep.
+    placeholder:
+      en_US: article, #content
+  - name: exclude_selectors
+    type: string
+    required: false
+    form: form
+    label:
+      en_US: Exclude selectors
+    human_description:
+      en_US: Optional comma-separated CSS selectors to remove.
+    placeholder:
+      en_US: nav, footer, .advertisement
+  - name: no_cache
+    type: boolean
+    required: false
+    form: form
+    label:
+      en_US: Fetch fresh content
+    human_description:
+      en_US: Skip Webclaw's response cache.
+    default: false
+extra:
+  python:
+    source: tools/scrape.py

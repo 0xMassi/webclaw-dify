@@ -1,0 +1,5 @@
+.env
+.venv/
+*.difypkg
+__pycache__/
+.pytest_cache/

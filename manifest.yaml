@@ -1,0 +1,29 @@
+version: 0.1.0
+type: plugin
+author: 0xMassi
+name: webclaw
+label:
+  en_US: Webclaw
+description:
+  en_US: Web scraping, search, site mapping, summarization, and structured extraction for Dify.
+created_at: "2026-09-04T13:03:44Z"
+icon: icon.svg
+resource:
+  memory: 1048576
+  permission: {}
+plugins:
+  tools:
+    - provider/webclaw.yaml
+meta:
+  version: 0.0.2
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+privacy: ./PRIVACY.md
+tags:
+  - search
+  - utilities

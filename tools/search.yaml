@@ -1,0 +1,92 @@
+identity:
+  author: 0xMassi
+  name: search
+  label:
+    en_US: Search
+description:
+  human:
+    en_US: Search the web and extract result content when requested.
+  llm: Search the live web for a query and return result titles, URLs, snippets, and optional extracted content.
+parameters:
+  - name: query
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Query
+    human_description:
+      en_US: The web search query.
+    llm_description: The concise search query needed to answer the user's request.
+  - name: num_results
+    type: number
+    required: false
+    form: form
+    label:
+      en_US: Number of results
+    human_description:
+      en_US: Return between 1 and 10 results.
+    min: 1
+    max: 10
+    default: 5
+  - name: scrape
+    type: boolean
+    required: false
+    form: form
+    label:
+      en_US: Scrape results
+    human_description:
+      en_US: Extract content from each returned result. This uses additional credits.
+    default: false
+  - name: formats
+    type: select
+    multiple: true
+    required: false
+    form: form
+    label:
+      en_US: Scrape formats
+    human_description:
+      en_US: Formats used when Scrape results is enabled.
+    options:
+      - label:
+          en_US: Markdown
+        value: markdown
+      - label:
+          en_US: Plain text
+        value: text
+      - label:
+          en_US: LLM-ready text
+        value: llm
+    default:
+      - markdown
+  - name: country
+    type: string
+    required: false
+    form: form
+    label:
+      en_US: Country
+    human_description:
+      en_US: Optional two-letter country code for localized results.
+    placeholder:
+      en_US: us
+  - name: lang
+    type: string
+    required: false
+    form: form
+    label:
+      en_US: Language
+    human_description:
+      en_US: Optional two-letter language code.
+    placeholder:
+      en_US: en
+  - name: no_cache
+    type: boolean
+    required: false
+    form: form
+    label:
+      en_US: Run a fresh search
+    human_description:
+      en_US: Skip Webclaw's response cache.
+    default: false
+extra:
+  python:
+    source: tools/search.py

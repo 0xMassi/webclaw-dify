@@ -1,0 +1,41 @@
+identity:
+  author: 0xMassi
+  name: extract
+  label:
+    en_US: Extract
+description:
+  human:
+    en_US: Extract structured data from a webpage using a prompt or JSON Schema.
+  llm: Read a URL and return structured data that follows the supplied extraction prompt or JSON Schema.
+parameters:
+  - name: url
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: URL
+    human_description:
+      en_US: The webpage containing the data to extract.
+    llm_description: A complete HTTP or HTTPS URL to extract structured data from.
+  - name: prompt
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Extraction prompt
+    human_description:
+      en_US: Describe the fields or facts to extract.
+    llm_description: A precise description of the structured information to extract. Either this or JSON Schema is required.
+  - name: schema
+    type: string
+    required: false
+    form: form
+    label:
+      en_US: JSON Schema
+    human_description:
+      en_US: Optional JSON Schema object that defines the desired output.
+    placeholder:
+      en_US: '{"type":"object","properties":{"title":{"type":"string"}}}'
+extra:
+  python:
+    source: tools/extract.py

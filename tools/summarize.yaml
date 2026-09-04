@@ -1,0 +1,41 @@
+identity:
+  author: 0xMassi
+  name: summarize
+  label:
+    en_US: Summarize
+description:
+  human:
+    en_US: Generate a concise summary of a webpage.
+  llm: Fetch a URL and summarize its main content.
+parameters:
+  - name: url
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: URL
+    human_description:
+      en_US: The webpage to summarize.
+    llm_description: A complete HTTP or HTTPS URL whose content should be summarized.
+  - name: max_sentences
+    type: number
+    required: false
+    form: form
+    label:
+      en_US: Maximum sentences
+    human_description:
+      en_US: Optional upper bound for the summary length.
+    min: 1
+    max: 50
+  - name: no_cache
+    type: boolean
+    required: false
+    form: form
+    label:
+      en_US: Generate a fresh summary
+    human_description:
+      en_US: Skip Webclaw's response cache.
+    default: false
+extra:
+  python:
+    source: tools/summarize.py

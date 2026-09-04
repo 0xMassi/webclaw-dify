@@ -1,0 +1,32 @@
+identity:
+  author: 0xMassi
+  name: webclaw
+  label:
+    en_US: Webclaw
+  description:
+    en_US: Reliable web scraping, search, mapping, summarization, and structured extraction.
+  icon: icon.svg
+  tags:
+    - search
+    - utilities
+credentials_for_provider:
+  webclaw_api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Webclaw API key
+    placeholder:
+      en_US: wc_...
+    help:
+      en_US: Create an API key in the Webclaw dashboard.
+    url: https://webclaw.io/dashboard/api-keys
+tools:
+  - tools/scrape.yaml
+  - tools/search.yaml
+  - tools/map.yaml
+  - tools/extract.yaml
+  - tools/summarize.yaml
+  - tools/batch.yaml
+extra:
+  python:
+    source: provider/webclaw.py

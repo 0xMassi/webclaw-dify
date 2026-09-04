@@ -1,8 +1,11 @@
-.env
+.env*
 .git/
+.gitignore
 .github/
 .pytest_cache/
 .venv/
+pyproject.toml
 tests/
+uv.lock
 __pycache__/
 *.difypkg

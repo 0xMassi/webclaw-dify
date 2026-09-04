@@ -23,6 +23,14 @@ extraction through the hosted Webclaw API.
 Dify sends the key to `https://api.webclaw.io` as a Bearer token. The plugin
 uses no other destination.
 
+## Connection and security
+
+The Dify runtime needs outbound HTTPS access to `api.webclaw.io`. The plugin
+connects only to that fixed API endpoint; Webclaw performs requests to the URLs
+selected by the user. The hosted API rejects private and internal destinations,
+including redirects to them, before fetching content. Requests time out after
+120 seconds, and credentials are never included in tool output or error logs.
+
 ## Local development
 
 This plugin requires Python 3.12 and `uv`.
@@ -41,6 +49,8 @@ Run the tests with:
 ```bash
 uv run pytest
 ```
+
+Marketplace-compatible dependencies are also listed in `requirements.txt`.
 
 Package the plugin from the parent directory with:
 

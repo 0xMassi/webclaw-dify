@@ -2,6 +2,8 @@ version: 0.1.0
 type: plugin
 author: 0xmassi
 name: webclaw
+repo: https://github.com/0xMassi/webclaw-dify
+contact: privacy@webclaw.io
 label:
   en_US: Webclaw
 description:
@@ -11,11 +13,15 @@ icon: icon.svg
 resource:
   memory: 1048576
   permission: {}
+network:
+  domains:
+    - api.webclaw.io
 plugins:
   tools:
     - provider/webclaw.yaml
 meta:
   version: 0.0.2
+  minimum_dify_version: 1.7.0
   arch:
     - amd64
     - arm64

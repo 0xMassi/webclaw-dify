@@ -1155,8 +1155,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "dify-plugin", specifier = ">=0.9.0,<1.0" },
-    { name = "requests", specifier = ">=2.32.5,<3" },
+    { name = "dify-plugin", specifier = "==0.10.2" },
+    { name = "requests", specifier = "==2.34.2" },
 ]
 
 [package.metadata.requires-dev]

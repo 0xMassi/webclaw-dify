@@ -13,6 +13,14 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
+      - run: python -m pip install --requirement requirements.txt
       - run: uv sync --locked
       - run: uv run pytest
       - run: python -m compileall -q main.py provider tools
+      - name: Package with the current Dify plugin daemon
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download --repo langgenius/dify-plugin-daemon --pattern dify-plugin-linux-amd64 --dir "$RUNNER_TEMP"
+          chmod +x "$RUNNER_TEMP/dify-plugin-linux-amd64"
+          "$RUNNER_TEMP/dify-plugin-linux-amd64" plugin package . -o webclaw.difypkg

@@ -54,3 +54,37 @@ def test_client_turns_api_errors_into_clear_plugin_errors():
 def test_client_rejects_an_empty_key_before_network_access():
     with pytest.raises(ValueError, match="API key is required"):
         WebclawClient(" ")
+
+
+def test_client_removes_internal_execution_metadata_from_results():
+    session = FakeSession(
+        FakeResponse(
+            {
+                "engine": {"profile": "internal"},
+                "antibot": {"pool": "internal"},
+                "data": {"engine": "user-requested field"},
+                "results": [
+                    {
+                        "url": "https://example.com",
+                        "engine": {"profile": "internal"},
+                        "antibot": {"pool": "internal"},
+                        "data": {"engine": "user-requested field"},
+                    }
+                ],
+            }
+        )
+    )
+
+    result = WebclawClient("wc_test", session=session).post(
+        "/v1/batch", {"urls": ["https://example.com"]}
+    )
+
+    assert result == {
+        "data": {"engine": "user-requested field"},
+        "results": [
+            {
+                "url": "https://example.com",
+                "data": {"engine": "user-requested field"},
+            }
+        ],
+    }

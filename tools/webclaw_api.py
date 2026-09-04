@@ -6,6 +6,26 @@ import requests
 
 BASE_URL = "https://api.webclaw.io"
 REQUEST_TIMEOUT = 120
+_INTERNAL_RESPONSE_FIELDS = {"antibot", "engine"}
+
+
+def _public_response(data: dict[str, Any]) -> dict[str, Any]:
+    public = {
+        key: value for key, value in data.items() if key not in _INTERNAL_RESPONSE_FIELDS
+    }
+    results = public.get("results")
+    if isinstance(results, list):
+        public["results"] = [
+            {
+                key: value
+                for key, value in result.items()
+                if key not in _INTERNAL_RESPONSE_FIELDS
+            }
+            if isinstance(result, dict)
+            else result
+            for result in results
+        ]
+    return public
 
 
 class WebclawAPIError(RuntimeError):
@@ -75,4 +95,4 @@ class WebclawClient:
             )
         if not isinstance(data, dict):
             raise WebclawAPIError("Webclaw API returned an unexpected response shape.")
-        return data
+        return _public_response(data)
